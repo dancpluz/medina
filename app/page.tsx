@@ -1,9 +1,10 @@
-import Image from "next/image";
+'use client'
+import Scene from '@/components/Scene';
 
 export default function Home() {
   return (
-    <div>
-      
-    </div>
+    <main className='relative h-screen'>
+      <Scene />
+    </main>
   );
 }

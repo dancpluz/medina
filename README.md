@@ -1,9 +1,11 @@
 - [ ] Modelo 3D Envelope
+  - [ ] Modelo
   - [ ] Texto acompanhando
   - [ ] Animação float
   - [ ] Animação hover
   - [ ] Animação ao clicar
 - [ ] Modelo 3D Coração
+  - [x] Modelo
   - [ ] Animação entrando
   - [ ] Animação float
   - [ ] Animação hover
@@ -11,7 +13,7 @@
   - [ ] Arrastar para girar
   - [ ] Textura vidro
 - [ ] Texto
-  - [ ] Texto atrás (nome)
+  - [x] Texto atrás (nome)
   - [ ] Texto na frente (veja pq)
 - [ ] Transição do envelope pro coração
 - [ ] Fotos
@@ -23,6 +25,7 @@
   - [ ] Sequência de fotos girando com o coração
 - [ ] Responsivo
 - [ ] Fundo animado
+- [ ] Piada Final
 
 BACKLOG
   - [ ] Música personalizado com disco girando
