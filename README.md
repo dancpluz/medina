@@ -10,8 +10,8 @@
   - [ ] Animação float
   - [ ] Animação hover
   - [ ] Animação ao clicar
-  - [ ] Arrastar para girar
-  - [ ] Textura vidro
+  - [x] Arrastar para girar
+  - [x] Textura vidro
 - [ ] Texto
   - [x] Texto atrás (nome)
   - [ ] Texto na frente (veja pq)
@@ -26,6 +26,7 @@
 - [ ] Responsivo
 - [ ] Fundo animado
 - [ ] Piada Final
+- [x] Efeito Paralax Camera
 
 BACKLOG
   - [ ] Música personalizado com disco girando
