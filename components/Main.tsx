@@ -7,9 +7,11 @@ import { useThree } from '@react-three/fiber';
 
 export default function Main() {
   const { viewport } = useThree();
+  const fit = Math.min(viewport.width, viewport.height)
+  const padding = 0.8
 
   return (
-    <group scale={viewport.width / 3} >
+    <group scale={fit * padding} position={[0, 0, -3]}>
       <Model />
       <Carousel />
     </group>

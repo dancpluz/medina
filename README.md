@@ -28,6 +28,7 @@
 - [ ] Fundo animado
 - [ ] Piada Final
 - [x] Efeito Paralax Camera
+- [ ] Context
 
 BACKLOG
   - [ ] Música personalizado com disco girando

@@ -1,9 +1,7 @@
 'use client'
 
-import { Canvas, useFrame, useThree } from '@react-three/fiber';
-import { Environment, OrbitControls } from '@react-three/drei';
-import Model from './Model';
-import * as THREE from 'three';
+import { Canvas, useFrame } from '@react-three/fiber';
+import { Environment } from '@react-three/drei';
 import { easing } from 'maath';
 import Main from './Main';
 
@@ -20,8 +18,6 @@ function CameraParallax() {
   })
   return null
 }
-
-
 
 export default function Scene() {  
   return (

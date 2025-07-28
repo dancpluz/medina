@@ -90,7 +90,7 @@ export default function Model(props: JSX.IntrinsicElements['group']) {
 
   return (
     <group {...props} >
-      <Text fontSize={0.4} textAlign='center' position={[0, 0.8, -0.5]} font='/fonts/DSNarXC.ttf' color="black">
+      <Text fontSize={0.25} textAlign='center' position={[0, 0.85, -1]} font='/fonts/Montserrat-Thin.otf' color="black">
         Eu te amo
       </Text>
       <Text fontSize={1.9} textAlign='center' position={[0, 0, -1]} font='/fonts/DSNarXC.ttf' color="black">
@@ -101,7 +101,7 @@ export default function Model(props: JSX.IntrinsicElements['group']) {
         {...nodes.Heart}
         onClick={(e) => { e.stopPropagation(); if (!pulsing) setPulsing(true) }}
         onPointerOver={(e) => (e.stopPropagation(), setHovered(true))}
-        onPointerOut={(e) => (setHovered(false))}
+        onPointerOut={(e) => (e.stopPropagation(), setHovered(false))}
         {...bind()}
       >
         <MeshTransmissionMaterial {...materialProps} />
