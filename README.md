@@ -18,11 +18,12 @@
 - [ ] Transição do envelope pro coração
 - [ ] Fotos
   - [ ] Escolher fotos
+  - [ ] Textos
   - [ ] Interação com fotos
   - [ ] Cada foto com seu próprio texto
   - [ ] Zoom ao clicar
-  - [ ] Animação hover
-  - [ ] Sequência de fotos girando com o coração
+  - [x] Animação hover
+  - [x] Sequência de fotos girando com o coração
 - [ ] Responsivo
 - [ ] Fundo animado
 - [ ] Piada Final

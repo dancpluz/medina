@@ -18,8 +18,7 @@ type GLTFResult = GLTF & {
 
 export default function Model(props: JSX.IntrinsicElements['group']) {
   const mesh = useRef<THREE.Mesh>(null!);
-  const { nodes } = useGLTF('/heart.glb') as GLTFResult;
-  const { viewport } = useThree();
+  const { nodes } = useGLTF('/heart.glb') as unknown as GLTFResult;
   const velocity = useRef(0);
   const [hovered, setHovered] = useState(false)
   const [grabbing, setGrabbing] = useState(false)
@@ -90,7 +89,7 @@ export default function Model(props: JSX.IntrinsicElements['group']) {
   )
 
   return (
-    <group scale={viewport.width / 3} {...props} >
+    <group {...props} >
       <Text fontSize={0.4} textAlign='center' position={[0, 0.8, -0.5]} font='/fonts/DSNarXC.ttf' color="black">
         Eu te amo
       </Text>
