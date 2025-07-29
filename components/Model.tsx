@@ -1,3 +1,4 @@
+'use client'
 
 import * as THREE from 'three'
 import React, { JSX, useRef, useState } from 'react'
@@ -10,9 +11,6 @@ import { useDrag } from '@use-gesture/react'
 type GLTFResult = GLTF & {
   nodes: {
     Heart: THREE.Mesh
-  }
-  materials: {
-    ['Material.001']: THREE.MeshPhysicalMaterial
   }
 }
 
@@ -109,3 +107,16 @@ export default function Model(props: JSX.IntrinsicElements['group']) {
     </group>
   )
 }
+
+//useGLTF.preload('/model.gltf')
+
+{/* <mesh
+  ref={mesh}
+  geometry={nodes.heart_teamRed.geometry}
+  //material={materials['Red.015']}
+  rotation={[Math.PI / 2, 0, 0]}
+  onClick={(e) => { e.stopPropagation(); if (!pulsing) setPulsing(true) }}
+  onPointerOver={(e) => (e.stopPropagation(), setHovered(true))}
+  onPointerOut={(e) => (e.stopPropagation(), setHovered(false))}
+  {...bind()}
+> */}

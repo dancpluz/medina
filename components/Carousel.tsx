@@ -1,7 +1,7 @@
 import * as THREE from 'three'
 import { useRef, useState } from 'react'
 import { useFrame } from '@react-three/fiber'
-import { Plane, Image, Text, useCursor } from '@react-three/drei'
+import { Plane, Image as Image2D, Text, useCursor } from '@react-three/drei'
 import { easing } from 'maath'
 
 interface CardProps { url: string; text: string; targetRotation?: number };
@@ -100,10 +100,9 @@ export function Card({ url, selected, text }: CardComponentProps) {
 
   return (
     <>
-      <Image
+      <Image2D
         ref={imageRef}
         url={url}
-        alt={text}
         radius={0.05}
         transparent
         side={THREE.DoubleSide}
@@ -116,6 +115,7 @@ export function Card({ url, selected, text }: CardComponentProps) {
         fontSize={0.1}
         letterSpacing={-0.04}
         color='white'
+        material-opacity={0}
         //strokeColor='black'
         //strokeOpacity={1}
         //strokeWidth={0.002}

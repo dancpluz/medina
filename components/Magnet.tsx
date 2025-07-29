@@ -1,3 +1,5 @@
+'use client'
+
 import React, { useState, useEffect, useRef, ReactNode, HTMLAttributes } from "react";
 
 interface MagnetProps extends HTMLAttributes<HTMLDivElement> {
@@ -65,7 +67,6 @@ const Magnet: React.FC<MagnetProps> = ({
     <div
       ref={magnetRef}
       className={wrapperClassName}
-      style={{ position: "relative", display: "inline-block" }}
       {...props}
     >
       <div

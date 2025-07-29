@@ -26,7 +26,7 @@ export default function Scene() {
       {/* <OrbitControls /> */}
       <CameraParallax />
       <directionalLight intensity={3} position={[0, 3, 2]} />
-      <Environment preset="sunset" />
+      <Environment files="/hdr/cloudy.hdr" />
       <Main />
     </Canvas>
   )

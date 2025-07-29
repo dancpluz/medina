@@ -30,6 +30,7 @@
 - [ ] Fundo animado
 - [ ] Piada Final
 - [x] Efeito Paralax Camera
+- [ ] Melhorar Loading state
 - [ ] Context
 
 BACKLOG
