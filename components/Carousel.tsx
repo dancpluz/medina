@@ -112,8 +112,8 @@ export function Card({ url, selected, text }: CardComponentProps) {
       />
       <Text
         ref={textRef}
-        font='/fonts/Montserrat-Black.otf'
-        fontSize={0.08}
+        font='/fonts/Degular-Black.otf'
+        fontSize={0.1}
         letterSpacing={-0.04}
         color='white'
         //strokeColor='black'

@@ -9,7 +9,7 @@
   - [ ] Animação entrando
   - [ ] Animação float
   - [ ] Animação hover
-  - [ ] Animação ao clicar
+  - [x] Animação ao clicar
   - [x] Arrastar para girar
   - [x] Textura vidro
 - [ ] Texto
@@ -19,11 +19,13 @@
 - [ ] Fotos
   - [ ] Escolher fotos
   - [ ] Textos
-  - [ ] Interação com fotos
-  - [ ] Cada foto com seu próprio texto
-  - [ ] Zoom ao clicar
+  - [x] Interação com fotos
+  - [x] Cada foto com seu próprio texto
+  - [x] Zoom ao clicar
   - [x] Animação hover
   - [x] Sequência de fotos girando com o coração
+- [x] Botão magnetico
+- [x] Encontrar fonte
 - [ ] Responsivo
 - [ ] Fundo animado
 - [ ] Piada Final

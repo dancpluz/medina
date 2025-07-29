@@ -3,7 +3,7 @@ import * as THREE from 'three'
 import React, { JSX, useRef, useState } from 'react'
 import { useGLTF, Text, MeshTransmissionMaterial, useCursor } from '@react-three/drei'
 import { GLTF } from 'three-stdlib'
-import { useFrame, useThree } from '@react-three/fiber'
+import { useFrame } from '@react-three/fiber'
 import { useDrag } from '@use-gesture/react'
 // import { useControls } from 'leva'
 
@@ -90,7 +90,7 @@ export default function Model(props: JSX.IntrinsicElements['group']) {
 
   return (
     <group {...props} >
-      <Text fontSize={0.25} textAlign='center' position={[0, 0.85, -1]} font='/fonts/Montserrat-Thin.otf' color="black">
+      <Text fontSize={0.25} textAlign='center' position={[0, 0.85, -1]} font='/fonts/Degular-Thin.otf' color="black">
         Eu te amo
       </Text>
       <Text fontSize={1.9} textAlign='center' position={[0, 0, -1]} font='/fonts/DSNarXC.ttf' color="black">

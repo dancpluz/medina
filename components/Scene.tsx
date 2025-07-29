@@ -1,7 +1,7 @@
 'use client'
 
 import { Canvas, useFrame } from '@react-three/fiber';
-import { Environment } from '@react-three/drei';
+import { Environment, OrbitControls } from '@react-three/drei';
 import { easing } from 'maath';
 import Main from './Main';
 
@@ -26,7 +26,7 @@ export default function Scene() {
       {/* <OrbitControls /> */}
       <CameraParallax />
       <directionalLight intensity={3} position={[0, 3, 2]} />
-      <Environment preset="city" />
+      <Environment preset="sunset" />
       <Main />
     </Canvas>
   )
