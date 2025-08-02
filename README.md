@@ -1,21 +1,19 @@
 - [ ] Modelo 3D Envelope
   - [ ] Modelo
-  - [ ] Texto acompanhando
   - [ ] Animação float
   - [ ] Animação hover
   - [ ] Animação ao clicar
+  - [ ] Animação entrada
 - [ ] Modelo 3D Coração
   - [x] Modelo
-  - [ ] Animação entrando
-  - [ ] Animação float
-  - [ ] Animação hover
+  - [ ] Animação entrada
+  - [ ] Animação saída
   - [x] Animação ao clicar
   - [x] Arrastar para girar
   - [x] Textura vidro
-- [ ] Texto
+- [x] Texto
   - [x] Texto atrás (nome)
-  - [ ] Texto na frente (veja pq)
-- [ ] Transição do envelope pro coração
+  - [x] Botão na frente (veja pq)
 - [ ] Fotos
   - [ ] Escolher fotos
   - [ ] Textos
@@ -24,16 +22,21 @@
   - [x] Zoom ao clicar
   - [x] Animação hover
   - [x] Sequência de fotos girando com o coração
-- [x] Botão magnetico
+- [x] Pedido 
+  - [x] Botão anti magnetico
+  - [x] Botão magnetico
+- [x] Botão reverso magnetico
 - [x] Encontrar fonte
 - [ ] Responsivo
 - [ ] Fundo animado
 - [ ] Piada Final
 - [x] Efeito Paralax Camera
 - [ ] Melhorar Loading state
-- [ ] Context
+- [x] Context
+  - [x] Estágios de animação
+  - [x] Botão de ir para frente
+  - [ ] Transições de animação
 
 BACKLOG
   - [ ] Música personalizado com disco girando
   - [ ] Sound effects
-  - [ ] Forma de voltar nos passos

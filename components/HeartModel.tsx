@@ -14,7 +14,7 @@ type GLTFResult = GLTF & {
   }
 }
 
-export default function Model(props: JSX.IntrinsicElements['group']) {
+export default function HeartModel(props: JSX.IntrinsicElements['group']) {
   const mesh = useRef<THREE.Mesh>(null!);
   const { nodes } = useGLTF('/heart.glb') as unknown as GLTFResult;
   const velocity = useRef(0);

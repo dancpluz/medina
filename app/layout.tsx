@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import localFont from "next/font/local";
+import { AnimationProvider } from '@/hooks/useAnimationContext';
 
 const degular = localFont({
   src: [
@@ -54,7 +55,9 @@ export default function RootLayout({
       <body
         className={`${degular.variable} antialiased`}
       >
-        {children}
+        <AnimationProvider>
+          {children}
+        </AnimationProvider>
       </body>
     </html>
   );

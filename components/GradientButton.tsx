@@ -1,9 +1,10 @@
 import React from 'react'
 
-export default function GradientButton({ children, className }: { children: React.ReactNode, className?: string }) {
+export default function GradientButton({ children, className, onClick }: { children: React.ReactNode, className?: string, onClick?: () => void }) {
   return (
     <button
-      className={`relative px-8 py-2 overflow-hidden bg-zinc-900 transition-all duration-200 group inline-flex items-center justify-center whitespace-nowrap rounded-xl text-2xl font-medium ring-offset-background focus-visible:outline-none cursor-pointer focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 ${className}`}
+      className={`relative px-8 py-2 overflow-hidden bg-zinc-900 transition-all duration-200 group inline-flex items-center justify-center whitespace-nowrap text-white font-bold rounded-xl text-2xl ring-offset-background focus-visible:outline-none cursor-pointer focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 ${className}`}
+      onClick={onClick}
     >
       {/* Gradient background effect */}
       <div
