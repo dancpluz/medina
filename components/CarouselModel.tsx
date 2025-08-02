@@ -3,6 +3,7 @@ import { useRef, useState } from 'react'
 import { useFrame } from '@react-three/fiber'
 import { Plane, Image as Image2D, Text, useCursor } from '@react-three/drei'
 import { easing } from 'maath'
+import { deltaShortest } from '@/lib/utils'
 
 interface CardProps { url: string; text: string; targetRotation?: number };
 
@@ -21,12 +22,6 @@ const count = cards.length
 cards.forEach((card, i) => {
   card.targetRotation = (i * (2 * Math.PI)) / count
 })
-
-function deltaShortest(target: number, current: number): number {
-  let a = target - current;
-  a = ((a + Math.PI) % (2 * Math.PI) + 2 * Math.PI) % (2 * Math.PI) - Math.PI;
-  return a;
-}
 
 export default function Carousel({ radius = 0.7 }: { radius?: number }) {
   const [selectedCard, setSelectedCard] = useState<CardProps | null>(null)

@@ -108,7 +108,7 @@ export default function HeartModel(props: JSX.IntrinsicElements['group']) {
   )
 }
 
-//useGLTF.preload('/model.gltf')
+useGLTF.preload('/heart.glb')
 
 {/* <mesh
   ref={mesh}

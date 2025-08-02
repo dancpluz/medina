@@ -4,6 +4,7 @@ import React from 'react';
 import CarouselModel from './CarouselModel';
 import HeartModel from './HeartModel';
 import { useThree } from '@react-three/fiber';
+import EnvelopeModel from './EnvelopeModel';
 //import PillButton from './PillButton';
 
 export default function Main() {
@@ -13,8 +14,9 @@ export default function Main() {
 
   return (
     <group scale={fit * padding} position={[0, 0, -3]}>
-      <HeartModel />
-      <CarouselModel />
+      <EnvelopeModel />
+      {/* <HeartModel />
+      <CarouselModel /> */}
       {/* <PillButton position={[0, -0.08, 1.12]} /> */}
     </group>
   )

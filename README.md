@@ -1,6 +1,6 @@
-- [ ] Modelo 3D Envelope
-  - [ ] Modelo
-  - [ ] Animação float
+- [x] Modelo 3D Envelope
+  - [x] Modelo
+  - [x] Animação float
   - [ ] Animação hover
   - [ ] Animação ao clicar
   - [ ] Animação entrada
