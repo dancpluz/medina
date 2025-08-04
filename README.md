@@ -1,9 +1,8 @@
 - [x] Modelo 3D Envelope
   - [x] Modelo
   - [x] Animação float
-  - [ ] Animação hover
-  - [ ] Animação ao clicar
-  - [ ] Animação entrada
+  - [x] Animação hover
+  - [x] Animação ao clicar
 - [ ] Modelo 3D Coração
   - [x] Modelo
   - [ ] Animação entrada

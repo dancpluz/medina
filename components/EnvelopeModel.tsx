@@ -2,11 +2,12 @@
 
 import * as THREE from 'three'
 import React, { JSX, useRef, useState } from 'react'
-import { useGLTF, useAnimations, Float } from '@react-three/drei'
+import { useGLTF, Float, useCursor } from '@react-three/drei'
 import { GLTF } from 'three-stdlib'
 import { useFrame } from '@react-three/fiber'
 import { easing } from 'maath'
 import { deltaShortest } from '@/lib/utils'
+import { useAnimationContext } from '@/hooks/useAnimationContext'
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -21,45 +22,52 @@ type GLTFResult = GLTF & {
   }
 }
 
-type ActionName = 'Close' | 'FullOpen' | 'SemiOpen'
-type GLTFActions = Record<ActionName, THREE.AnimationAction>
-
 export default function EnvelopeModel(props: JSX.IntrinsicElements['group']) {
   const group = useRef<THREE.Group>(null!)
-  const { nodes, materials, animations } = useGLTF('/envelope.glb') as unknown as GLTFResult
-  const { actions } = useAnimations<GLTFActions>(animations, group)
+  const cover = useRef<THREE.Mesh>(null!)
+  const { nodes, materials } = useGLTF('/envelope.glb') as unknown as GLTFResult
+  const [hovered, setHovered] = useState(false);
+  const { stage, nextStage } = useAnimationContext();
 
-  const [hovered, setHovered] = useState(false)
+  useCursor(hovered, 'pointer', 'auto')
 
-  const onPointerOver = (e: THREE.Event) => {
-    e.stopPropagation()
-    setHovered(true)
-  }
-
-  const onPointerOut = (e: THREE.Event) => {
-    e.stopPropagation()
-    setHovered(false)
-  }
+  const onPointerOver = () => setHovered(true);
+  const onPointerOut = () => setHovered(false);
 
   useFrame((_, delta) => {
-    const targetScale = hovered ? 0.4 : 0.25
-    easing.damp(group.current.scale, 'x', targetScale, 0.3, delta)
-    easing.damp(group.current.scale, 'y', targetScale, 0.3, delta)
-    easing.damp(group.current.scale, 'z', targetScale, 0.3, delta)
+    if (stage && stage.id === 'envelope') {
+      const targetScale = hovered ? 0.4 : 0.25
+      easing.damp(group.current.scale, 'x', targetScale, 0.3, delta)
+      easing.damp(group.current.scale, 'y', targetScale, 0.3, delta)
+      easing.damp(group.current.scale, 'z', targetScale, 0.3, delta)
 
-    if (hovered) {
-      const currentY = group.current.rotation.y
-      const shortest = deltaShortest(0, currentY)
-      easing.damp(group.current.rotation, 'y', currentY + shortest, 0.2, delta)
+      if (hovered) {
+        const currentY = group.current.rotation.y
+        const shortest = deltaShortest(0, currentY)
+        easing.damp(group.current.rotation, 'y', currentY + shortest, 0.2, delta)
+
+        easing.damp(cover.current.rotation, 'x', -0.7, 0.2, delta)
+      } else {
+        group.current.rotation.y += 0.005
+
+        easing.damp(cover.current.rotation, 'x', -0.2, 0.2, delta)
+      }
     } else {
-      group.current.rotation.y += 0.005
+      easing.damp(cover.current.rotation, 'x', -1.4, 0.3, delta)
+
+      easing.damp(group.current.scale, 'x', 0, 0.4, delta)
+      easing.damp(group.current.scale, 'y', 0, 0.4, delta)
+      easing.damp(group.current.scale, 'z', 0, 0.4, delta)
+
+      return
     }
   })
+
 
   return (
     <Float
       speed={8}
-      rotationIntensity={0}
+      rotationIntensity={hovered ? 0.5 : 0}
       floatIntensity={0.5}
     >
       <group name="Scene"
@@ -69,6 +77,7 @@ export default function EnvelopeModel(props: JSX.IntrinsicElements['group']) {
         position={[0, 0.15, 0.4]}
         rotation={[-Math.PI, 0, 0]}
         scale={0.25}
+        onClick={nextStage}
         onPointerOver={onPointerOver}
         onPointerOut={onPointerOut}
       >
@@ -87,7 +96,7 @@ export default function EnvelopeModel(props: JSX.IntrinsicElements['group']) {
           />
         </group>
         <primitive object={nodes.Envelope} />
-        <primitive object={nodes.Cover} />
+        <primitive ref={cover} object={nodes.Cover} />
     </group>
   </Float>
   )
