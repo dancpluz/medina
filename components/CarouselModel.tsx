@@ -1,66 +1,85 @@
 import * as THREE from 'three'
-import { useRef, useState } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 import { useFrame } from '@react-three/fiber'
 import { Plane, Image as Image2D, Text, useCursor } from '@react-three/drei'
 import { easing } from 'maath'
 import { deltaShortest } from '@/lib/utils'
+import useAnimationContext from '@/hooks/useAnimationContext'
 
-interface CardProps { url: string; text: string; targetRotation?: number };
+interface CardProps { url: string; text: string; targetRotation: number }
 
 const cards: CardProps[] = [
-  { url: '/images/image1.jpg', text: 'Linda' },
-  { url: '/images/image2.jpg', text: 'Inteligente' },
-  { url: '/images/image3.jpg', text: 'Doidinha' },
-  { url: '/images/image4.jpg', text: 'Amorosa' },
-  { url: '/images/image5.jpg', text: 'Estilosa' },
-  { url: '/images/image6.jpg', text: 'Cheirosa' },
-  { url: '/images/image7.jpg', text: 'Divertida' },
+  { url: '/images/image1.jpg', text: 'Linda', targetRotation: 0 },
+  { url: '/images/image2.jpg', text: 'Inteligente', targetRotation: 0 },
+  { url: '/images/image3.jpg', text: 'Doidinha', targetRotation: 0 },
+  { url: '/images/image4.jpg', text: 'Amorosa', targetRotation: 0 },
+  { url: '/images/image5.jpg', text: 'Estilosa', targetRotation: 0 },
+  { url: '/images/image6.jpg', text: 'Cheirosa', targetRotation: 0 },
+  { url: '/images/image7.jpg', text: 'Divertida', targetRotation: 0 },
 ]
 
 const count = cards.length
-
 cards.forEach((card, i) => {
-  card.targetRotation = (i * (2 * Math.PI)) / count
+  card.targetRotation = (i * 2 * Math.PI) / count
 })
 
 export default function Carousel({ radius = 0.7 }: { radius?: number }) {
+  const group = useRef<THREE.Group>(null!)
+  const { stage } = useAnimationContext()
   const [selectedCard, setSelectedCard] = useState<CardProps | null>(null)
-  const groupRef = useRef<THREE.Group>(null!)
+  const [visible, setVisible] = useState(false)
+
+  // Intro: show only when stage.id === 'carousel'
+  useEffect(() => {
+    let timeout: NodeJS.Timeout
+    if (stage.id === 'carousel') {
+      timeout = setTimeout(() => setVisible(true), 1500)
+    } else {
+      setVisible(false)
+      setSelectedCard(null)
+    }
+    return () => clearTimeout(timeout)
+  }, [stage.id])
 
   useFrame((_, delta) => {
-    const currentRotation = groupRef.current.rotation
-    if (selectedCard !== null && selectedCard.targetRotation !== undefined) {
-      const d = deltaShortest(selectedCard.targetRotation, currentRotation.y);
-      easing.damp(groupRef.current.rotation, 'y', currentRotation.y + d, 0.1, delta);
+    // scale intro
+    const targetScale = visible ? 1 : 0
+    const scaleFactor = visible ? 0.8 : 0.4
+    easing.damp(group.current.scale, 'x', targetScale, scaleFactor, delta)
+    easing.damp(group.current.scale, 'y', targetScale, scaleFactor, delta)
+    easing.damp(group.current.scale, 'z', targetScale, scaleFactor, delta)
+
+    // rotation logic
+    const r = group.current.rotation
+    if (selectedCard) {
+      const d = deltaShortest(selectedCard.targetRotation, r.y)
+      easing.damp(r, 'y', r.y + d, 0.1, delta)
     } else {
-      currentRotation.y += 0.0008
+      r.y += 0.0008
     }
   })
 
   return (
     <>
-      {/* click outside to reset */}
       <Plane
-        onClick={(e) => (e.stopPropagation(), setSelectedCard(null))}
         args={[10, 10]}
         position={[0, 0, -2]}
+        visible={false}
+        onClick={(e) => { e.stopPropagation(); setSelectedCard(null) }}
       >
         <meshBasicMaterial transparent opacity={0} />
       </Plane>
-      <group ref={groupRef}>
+
+      <group ref={group} scale={[0, 0, 0]}>
         {cards.map((card, i) => {
-          const angle = i * (2 * Math.PI) / count
+          const angle = (i * 2 * Math.PI) / count
           return (
             <group
               key={i}
-              position={[
-                -Math.sin(angle) * radius,
-                0,
-                Math.cos(angle) * radius,
-              ]}
+              position={[-Math.sin(angle) * radius, 0, Math.cos(angle) * radius]}
               rotation={[0, -angle, 0]}
+              onClick={(e) => { e.stopPropagation(); setSelectedCard(card) }}
               scale={0.8}
-              onClick={(e) => (e.stopPropagation(), setSelectedCard(card))}
             >
               <Card url={card.url} text={card.text} selected={card === selectedCard} />
             </group>
@@ -77,7 +96,7 @@ interface CardComponentProps {
   selected: boolean
 }
 
-export function Card({ url, selected, text }: CardComponentProps) {
+function Card({ url, selected, text }: CardComponentProps) {
   const imageRef = useRef<THREE.Mesh>(null!)
   const textRef = useRef<THREE.Mesh>(null!)
   const [hovered, setHovered] = useState(false)
@@ -89,8 +108,7 @@ export function Card({ url, selected, text }: CardComponentProps) {
     easing.damp(imageRef.current.material, 'zoom', selected || hovered ? 1 : 1.4, 0.2, delta)
     easing.damp(imageRef.current.material, 'opacity', selected || hovered ? 1 : 0.7, 0.2, delta)
     easing.damp(textRef.current.material, 'opacity', selected ? 0.75 : 0, 0.2, delta)
-    const t = state.clock.getElapsedTime();
-    textRef.current.position.y = Math.sin(t * 1.5) * 0.02;
+    textRef.current.position.y = Math.sin(state.clock.getElapsedTime() * 1.5) * 0.02
   })
 
   return (
@@ -110,10 +128,8 @@ export function Card({ url, selected, text }: CardComponentProps) {
         fontSize={0.1}
         letterSpacing={-0.04}
         color='white'
+        material-transparent
         material-opacity={0}
-        //strokeColor='black'
-        //strokeOpacity={1}
-        //strokeWidth={0.002}
         position={[0, 0, 0.001]}
         anchorX='center'
         anchorY='middle'

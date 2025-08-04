@@ -1,12 +1,11 @@
-'use client'
-
 import * as THREE from 'three'
-import React, { JSX, useRef, useState } from 'react'
+import React, { JSX, useRef, useState, useEffect } from 'react'
 import { useGLTF, Text, MeshTransmissionMaterial, useCursor } from '@react-three/drei'
 import { GLTF } from 'three-stdlib'
 import { useFrame } from '@react-three/fiber'
 import { useDrag } from '@use-gesture/react'
-// import { useControls } from 'leva'
+import { easing } from 'maath'
+import useAnimationContext from '@/hooks/useAnimationContext'
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -16,10 +15,16 @@ type GLTFResult = GLTF & {
 
 export default function HeartModel(props: JSX.IntrinsicElements['group']) {
   const mesh = useRef<THREE.Mesh>(null!);
+  const textRef1 = useRef<THREE.Mesh>(null!)
+  const textRef2 = useRef<THREE.Mesh>(null!)
   const { nodes } = useGLTF('/heart.glb') as unknown as GLTFResult;
   const velocity = useRef(0);
   const [hovered, setHovered] = useState(false)
   const [grabbing, setGrabbing] = useState(false)
+  const [heartVisible, setHeartVisible] = useState(false)
+  const [showText, setShowText] = useState(false)
+  const { stage } = useAnimationContext();
+
   useCursor(hovered, 'pointer', 'auto')
   useCursor(grabbing, 'grabbing', 'pointer')
 
@@ -27,45 +32,62 @@ export default function HeartModel(props: JSX.IntrinsicElements['group']) {
   const pulseRef = useRef(0)
   const PULSE_DURATION = 0.5 // seconds
 
-  useFrame((state, delta) => {
+  useEffect(() => {
+    if (stage.id === 'heart') {
+      const showModel = setTimeout(() => {
+        setHeartVisible(true)
+        const showTextTimeout = setTimeout(() => {
+          setShowText(true)
+        }, 1500)
+        return () => clearTimeout(showTextTimeout)
+      }, 1000)
+      return () => clearTimeout(showModel)
+    } else {
+      if (stage.id !== 'carousel') {
+        setHeartVisible(false)
+      }
+      setShowText(false)
+    }
+  }, [stage.id])
+
+  useFrame((_, delta) => {
+    const targetScale = heartVisible ? 1 : 0
+    const scaleFactor = heartVisible ? 1 : 0.5
+    easing.damp(mesh.current.scale, 'x', targetScale, scaleFactor, delta)
+    easing.damp(mesh.current.scale, 'y', targetScale, scaleFactor, delta)
+    easing.damp(mesh.current.scale, 'z', targetScale, scaleFactor, delta)
+
+    if (textRef1.current && textRef2.current) {
+      easing.damp(textRef1.current.material, 'opacity', showText ? 1 : 0, showText ? 2 : 1, delta)
+      easing.damp(textRef2.current.material, 'opacity', showText ? 1 : 0, showText ? 1.2 : 0.6, delta)
+    }
+
     if (mesh.current) {
       mesh.current.rotation.z += 0.01;
-      // momentum
-      mesh.current.rotation.z += velocity.current
-      // friction
-      velocity.current *= 0.95
+      mesh.current.rotation.z += velocity.current;
+      velocity.current *= 0.95;
     }
+
     if (pulsing) {
-      pulseRef.current += delta
-      const t = pulseRef.current / PULSE_DURATION
+      pulseRef.current += delta;
+      const t = pulseRef.current / PULSE_DURATION;
       if (t >= 1) {
-        setPulsing(false)
-        pulseRef.current = 0
-        mesh.current.scale.set(1, 1, 1)
+        setPulsing(false);
+        pulseRef.current = 0;
+        mesh.current.scale.set(1, 1, 1);
       } else {
-        // scale curve: ease out then return
-        const scale = 1 + Math.sin(Math.PI * t) * 0.1
-        mesh.current.scale.set(scale, scale, scale)
+        const scale = 1 + Math.sin(Math.PI * t) * 0.1;
+        mesh.current.scale.set(scale, scale, scale);
       }
     }
-  })
-
-  // const materialProps = useControls({
-  //   thickness: { value: 0.2, min: 0, max: 3, step: 0.05 },
-  //   roughness: { value: 0, min: 0, max: 1, step: 0.1 },
-  //   transmission: { value: 1, min: 0, max: 1, step: 0.1 },
-  //   ior: { value: 1.1, min: 0, max: 3, step: 0.1 },
-  //   chromaticAberration: { value: 0.30, min: 0, max: 1 },
-  //   backside: { value: true },
-  //   color: { value: '#ff5454' },
-  // })
+  });
 
   const materialProps = {
     thickness: 0.2,
     roughness: 0,
     transmission: 1,
     ior: 1.1,
-    chromaticAberration: 0.30,
+    chromaticAberration: 0.3,
     backside: true,
     color: '#ff5454',
     envMapIntensity: 1,
@@ -76,7 +98,7 @@ export default function HeartModel(props: JSX.IntrinsicElements['group']) {
       setGrabbing(active)
       setPulsing(true)
       if (active) {
-        velocity.current = mx / 6000 // tune sensitivity
+        velocity.current = mx / 6000
       }
     },
     {
@@ -87,20 +109,42 @@ export default function HeartModel(props: JSX.IntrinsicElements['group']) {
   )
 
   return (
-    <group {...props} >
-      <Text fontSize={0.25} textAlign='center' position={[0, 0.85, -1]} font='/fonts/Degular-Thin.otf' color="black">
+    <group {...props}>
+      <Text
+        ref={textRef1}
+        fontSize={0.25}
+        textAlign='center'
+        position={[0, 0.85, -1]}
+        font='/fonts/Degular-Thin.otf'
+        color="black"
+        material-transparent
+        material-opacity={0}
+      >
         Eu te amo
       </Text>
-      <Text fontSize={1.9} textAlign='center' position={[0, 0, -1]} font='/fonts/DSNarXC.ttf' color="black">
+      <Text
+        ref={textRef2}
+        fontSize={1.9}
+        textAlign='center'
+        position={[0, 0, -1]}
+        font='/fonts/DSNarXC.ttf'
+        color="black"
+        material-transparent
+        material-opacity={0}
+      >
         Medina
       </Text>
       <mesh
         ref={mesh}
         {...nodes.Heart}
-        onClick={(e) => { e.stopPropagation(); if (!pulsing) setPulsing(true) }}
+        onClick={(e) => {
+          e.stopPropagation()
+          if (!pulsing) setPulsing(true)
+        }}
         onPointerOver={(e) => (e.stopPropagation(), setHovered(true))}
         onPointerOut={(e) => (e.stopPropagation(), setHovered(false))}
         {...bind()}
+        scale={[0, 0, 0]}
       >
         <MeshTransmissionMaterial {...materialProps} />
       </mesh>
@@ -109,14 +153,3 @@ export default function HeartModel(props: JSX.IntrinsicElements['group']) {
 }
 
 useGLTF.preload('/heart.glb')
-
-{/* <mesh
-  ref={mesh}
-  geometry={nodes.heart_teamRed.geometry}
-  //material={materials['Red.015']}
-  rotation={[Math.PI / 2, 0, 0]}
-  onClick={(e) => { e.stopPropagation(); if (!pulsing) setPulsing(true) }}
-  onPointerOver={(e) => (e.stopPropagation(), setHovered(true))}
-  onPointerOut={(e) => (e.stopPropagation(), setHovered(false))}
-  {...bind()}
-> */}

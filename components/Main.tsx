@@ -15,8 +15,8 @@ export default function Main() {
   return (
     <group scale={fit * padding} position={[0, 0, -3]}>
       <EnvelopeModel />
-      {/* <HeartModel />
-      <CarouselModel /> */}
+      <HeartModel />
+      <CarouselModel />
       {/* <PillButton position={[0, -0.08, 1.12]} /> */}
     </group>
   )

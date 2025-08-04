@@ -3,10 +3,10 @@
   - [x] Animação float
   - [x] Animação hover
   - [x] Animação ao clicar
-- [ ] Modelo 3D Coração
+- [x] Modelo 3D Coração
   - [x] Modelo
-  - [ ] Animação entrada
-  - [ ] Animação saída
+  - [x] Animação entrada
+  - [x] Animação saída
   - [x] Animação ao clicar
   - [x] Arrastar para girar
   - [x] Textura vidro
