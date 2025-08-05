@@ -2,29 +2,55 @@
 
 import React, { createContext, useContext, useState, ReactNode } from 'react';
 
-type Stage = {
+export type Stage = {
   id: string;
   buttonText?: string;
+  fadeIn?: number;      // Transition in duration (ms)
+  fadeOut?: number;     // Transition out duration (ms)
+  delay?: number;       // Transition delay (ms)
 };
 
 interface AnimationContextType {
   stage: Stage;
   setStage: (stage: Stage) => void;
-  stageArray: Stage[];
   nextStage: () => void;
   prevStage: () => void;
 }
 
 const AnimationContext = createContext<AnimationContextType | null>(null);
 
+export const stageArray: Stage[] = [
+  { id: 'envelope' },
+  {
+    id: 'heart',
+    buttonText: 'Veja o Porquê',
+    fadeIn: 800,
+    fadeOut: 500,
+    delay: 8000
+  },
+  {
+    id: 'carousel',
+    buttonText: 'Eu tenho um Pedido...',
+    fadeIn: 1500,
+    fadeOut: 500,
+    delay: 30000
+  },
+  { 
+    id: 'question',
+    fadeIn: 1500,
+    fadeOut: 800,
+    delay: 2000
+  },
+  {
+    id: 'final',
+    buttonText: 'Voltar',
+    fadeIn: 800,
+    fadeOut: 600,
+    delay: 5000
+  },
+];
+
 export const AnimationProvider = ({ children }: { children: ReactNode }) => {
-  const stageArray: Stage[] = [
-    { id: 'envelope' },
-    { id: 'heart', buttonText: 'Veja Por que' },
-    { id: 'carousel' },
-    { id: 'question' },
-    { id: 'final', buttonText: 'Voltar' },
-  ];
   const [stage, setStage] = useState<AnimationContextType['stage']>(stageArray[0]);
 
   function nextStage() {
@@ -46,7 +72,7 @@ export const AnimationProvider = ({ children }: { children: ReactNode }) => {
   }
 
   return (
-    <AnimationContext.Provider value={{ stage, setStage, stageArray, nextStage, prevStage }}>
+    <AnimationContext.Provider value={{ stage, setStage, nextStage, prevStage }}>
       {children}
     </AnimationContext.Provider>
   );

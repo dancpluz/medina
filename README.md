@@ -15,7 +15,7 @@
   - [x] Botão na frente (veja pq)
 - [ ] Fotos
   - [ ] Escolher fotos
-  - [ ] Textos
+  - [ ] Escolher Textos
   - [x] Interação com fotos
   - [x] Cada foto com seu próprio texto
   - [x] Zoom ao clicar
@@ -27,15 +27,17 @@
 - [x] Botão reverso magnetico
 - [x] Encontrar fonte
 - [ ] Responsivo
-- [ ] Fundo animado
 - [ ] Piada Final
 - [x] Efeito Paralax Camera
 - [ ] Melhorar Loading state
 - [x] Context
   - [x] Estágios de animação
   - [x] Botão de ir para frente
-  - [ ] Transições de animação
+  - [x] Transições do botão
 
 BACKLOG
-  - [ ] Música personalizado com disco girando
-  - [ ] Sound effects
+
+- [ ] Música personalizado com disco girando
+- [ ] Sound effects
+- [ ] Fundo animado
+
