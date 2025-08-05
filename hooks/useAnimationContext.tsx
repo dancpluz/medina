@@ -43,10 +43,10 @@ export const stageArray: Stage[] = [
   },
   {
     id: 'final',
-    buttonText: 'Voltar',
+    buttonText: 'kkkkkkkkk',
     fadeIn: 800,
     fadeOut: 600,
-    delay: 5000
+    delay: 3000
   },
 ];
 

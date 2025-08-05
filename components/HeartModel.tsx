@@ -14,7 +14,7 @@ type GLTFResult = GLTF & {
 }
 
 export default function HeartModel(props: JSX.IntrinsicElements['group']) {
-  const mesh = useRef<THREE.Mesh>(null!);
+  const heartRef = useRef<THREE.Mesh>(null!);
   const textRef1 = useRef<THREE.Mesh>(null!)
   const textRef2 = useRef<THREE.Mesh>(null!)
   const { nodes } = useGLTF('/heart.glb') as unknown as GLTFResult;
@@ -53,18 +53,20 @@ export default function HeartModel(props: JSX.IntrinsicElements['group']) {
   useFrame((_, delta) => {
     const targetScale = heartVisible ? 1 : 0
     const scaleFactor = heartVisible ? 1 : 0.5
-    easing.damp(mesh.current.scale, 'x', targetScale, scaleFactor, delta)
-    easing.damp(mesh.current.scale, 'y', targetScale, scaleFactor, delta)
-    easing.damp(mesh.current.scale, 'z', targetScale, scaleFactor, delta)
+    easing.damp(heartRef.current.scale, 'x', targetScale, scaleFactor, delta)
+    easing.damp(heartRef.current.scale, 'y', targetScale, scaleFactor, delta)
+    easing.damp(heartRef.current.scale, 'z', targetScale, scaleFactor, delta)
 
     if (textRef1.current && textRef2.current) {
       easing.damp(textRef1.current.material, 'opacity', showText ? 1 : 0, showText ? 2 : 1, delta)
       easing.damp(textRef2.current.material, 'opacity', showText ? 1 : 0, showText ? 1.2 : 0.6, delta)
     }
 
-    if (mesh.current) {
-      mesh.current.rotation.z += 0.01;
-      mesh.current.rotation.z += velocity.current;
+    if (heartRef.current) {
+      if (!grabbing) {
+        heartRef.current.rotation.z += 0.01;
+      }
+      heartRef.current.rotation.z += velocity.current;
       velocity.current *= 0.95;
     }
 
@@ -74,10 +76,10 @@ export default function HeartModel(props: JSX.IntrinsicElements['group']) {
       if (t >= 1) {
         setPulsing(false);
         pulseRef.current = 0;
-        mesh.current.scale.set(1, 1, 1);
+        heartRef.current.scale.set(1, 1, 1);
       } else {
         const scale = 1 + Math.sin(Math.PI * t) * 0.1;
-        mesh.current.scale.set(scale, scale, scale);
+        heartRef.current.scale.set(scale, scale, scale);
       }
     }
   });
@@ -135,7 +137,7 @@ export default function HeartModel(props: JSX.IntrinsicElements['group']) {
         Medina
       </Text>
       <mesh
-        ref={mesh}
+        ref={heartRef}
         {...nodes.Heart}
         onClick={(e) => {
           e.stopPropagation()

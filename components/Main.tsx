@@ -5,6 +5,7 @@ import CarouselModel from './CarouselModel';
 import HeartModel from './HeartModel';
 import { useThree } from '@react-three/fiber';
 import EnvelopeModel from './EnvelopeModel';
+import FinalTextModel from './FinalTextModel';
 
 export default function Main() {
   const { viewport } = useThree();
@@ -16,6 +17,7 @@ export default function Main() {
       <EnvelopeModel />
       <HeartModel />
       <CarouselModel />
+      <FinalTextModel />
     </group>
   )
 }

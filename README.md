@@ -26,8 +26,8 @@
   - [x] Botão magnetico
 - [x] Botão reverso magnetico
 - [x] Encontrar fonte
-- [ ] Responsivo
-- [ ] Piada Final
+- [x] Responsivo
+- [x] Piada Final
 - [x] Efeito Paralax Camera
 - [ ] Melhorar Loading state
 - [x] Context
