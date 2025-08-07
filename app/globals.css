@@ -40,6 +40,10 @@ body {
   user-select: none;
 }
 
+canvas {
+  touch-action: none;
+}
+
 /* From Uiverse.io by andrew-demchenk0 */
 
 .cube-loader {
