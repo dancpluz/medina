@@ -1,5 +1,3 @@
-'use client'
-
 import * as THREE from 'three'
 import { Center, MeshTransmissionMaterial, Text3D, useCursor } from '@react-three/drei'
 import { useFrame } from '@react-three/fiber'
@@ -14,17 +12,25 @@ export default function FinalTextModel() {
   const [grabbing, setGrabbing] = useState(false)
   const [hovered, setHovered] = useState(false)
   const [visible, setVisible] = useState(false)
+  const [showFirst, setShowFirst] = useState(true)
   const { stage } = useAnimationContext()
 
   // control visibility on stage change
   useEffect(() => {
-    let timeout: NodeJS.Timeout
+    let introTimeout: NodeJS.Timeout
+    let flipTimeout: NodeJS.Timeout
     if (stage.id === 'final') {
-      timeout = setTimeout(() => setVisible(true), 2000)
+      introTimeout = setTimeout(() => setVisible(true), 2000)
+      setShowFirst(true)
+      flipTimeout = setTimeout(() => setShowFirst(false), 6000)
     } else {
       setVisible(false)
+      setShowFirst(true)
     }
-    return () => clearTimeout(timeout)
+    return () => {
+      clearTimeout(introTimeout)
+      clearTimeout(flipTimeout)
+    }
   }, [stage.id])
 
   useFrame((_, delta) => {
@@ -79,18 +85,33 @@ export default function FinalTextModel() {
       onPointerOver={() => setHovered(true)}
       onPointerOut={() => setHovered(false)}
     >
-      <Text3D
-        font='/fonts/Inter_Bold.json'
-        size={0.35}
-        letterSpacing={-0.01}
-        curveSegments={32}
-        bevelEnabled
-        bevelSize={0.02}
-        bevelThickness={0.01}
-      >
-        E o cuzinho?
-        <MeshTransmissionMaterial {...materialProps} />
-      </Text3D>
+      {showFirst ? (
+        <Text3D
+          font='/fonts/Inter_Bold.json'
+          size={0.35}
+          letterSpacing={-0.01}
+          curveSegments={32}
+          bevelEnabled
+          bevelSize={0.02}
+          bevelThickness={0.01}
+        >
+          E o cuzinho?
+          <MeshTransmissionMaterial {...materialProps} />
+        </Text3D>
+      ) : (
+        <Text3D
+          font='/fonts/Inter_Bold.json'
+          size={0.35}
+          letterSpacing={-0.01}
+          curveSegments={32}
+          bevelEnabled
+          bevelSize={0.02}
+          bevelThickness={0.01}
+        >
+          Eu te amo!
+          <MeshTransmissionMaterial {...materialProps} />
+        </Text3D>
+      )}
     </Center>
   )
 }

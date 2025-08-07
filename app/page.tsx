@@ -1,3 +1,4 @@
+'use client'
 import Scene from '@/components/Scene';
 import StageButtons from '@/components/StageButtons';
 import FinalQuestion from '@/components/FinalQuestion';

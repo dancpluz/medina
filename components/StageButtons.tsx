@@ -3,7 +3,8 @@
 import React from 'react';
 import GradientButton from './GradientButton';
 import Magnet from './Magnet';
-import useAnimationContext, { stageArray } from '@/hooks/useAnimationContext';
+import useAnimationContext from '@/hooks/useAnimationContext';
+import { stageArray } from '@/lib/utils';
 
 export default function StageButtons() {
   const { stage, nextStage } = useAnimationContext()

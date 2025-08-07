@@ -3,20 +3,8 @@ import React, { useRef, useState, useEffect } from 'react'
 import { useFrame } from '@react-three/fiber'
 import { Plane, Image as Image2D, Text, useCursor } from '@react-three/drei'
 import { easing } from 'maath'
-import { deltaShortest } from '@/lib/utils'
+import { CardProps, cards, deltaShortest } from '@/lib/utils'
 import useAnimationContext from '@/hooks/useAnimationContext'
-
-interface CardProps { url: string; text: string; targetRotation: number }
-
-const cards: CardProps[] = [
-  { url: '/images/image1.jpg', text: 'Linda', targetRotation: 0 },
-  { url: '/images/image2.jpg', text: 'Inteligente', targetRotation: 0 },
-  { url: '/images/image3.jpg', text: 'Doidinha', targetRotation: 0 },
-  { url: '/images/image4.jpg', text: 'Amorosa', targetRotation: 0 },
-  { url: '/images/image5.jpg', text: 'Estilosa', targetRotation: 0 },
-  { url: '/images/image6.jpg', text: 'Cheirosa', targetRotation: 0 },
-  { url: '/images/image7.jpg', text: 'Divertida', targetRotation: 0 },
-]
 
 const count = cards.length
 cards.forEach((card, i) => {

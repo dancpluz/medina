@@ -13,9 +13,9 @@
 - [x] Texto
   - [x] Texto atrás (nome)
   - [x] Botão na frente (veja pq)
-- [ ] Fotos
-  - [ ] Escolher fotos
-  - [ ] Escolher Textos
+- [x] Fotos
+  - [x] Escolher fotos
+  - [x] Escolher Textos
   - [x] Interação com fotos
   - [x] Cada foto com seu próprio texto
   - [x] Zoom ao clicar
@@ -29,11 +29,12 @@
 - [x] Responsivo
 - [x] Piada Final
 - [x] Efeito Paralax Camera
-- [ ] Melhorar Loading state
+- [x] Melhorar Loading state
 - [x] Context
   - [x] Estágios de animação
   - [x] Botão de ir para frente
   - [x] Transições do botão
+- [x] Organizar Código
 
 BACKLOG
 
