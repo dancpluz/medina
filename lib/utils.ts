@@ -39,19 +39,18 @@ export const stageArray: Stage[] = [
     buttonText: 'kkkkkkkkk',
     fadeIn: 800,
     fadeOut: 600,
-    delay: 3000
+    delay: 4000
   },
 ];
 
-
 export type CardProps = { url: string; text: string; targetRotation: number }
 
-export const cards: CardProps[] = [
-  { url: '/images/image1.jpg', text: 'Estilosa', targetRotation: 0 },
-  { url: '/images/image2.jpg', text: 'Formosa', targetRotation: 0 },
-  { url: '/images/image3.jpg', text: 'Carinhosa', targetRotation: 0 },
-  { url: '/images/image4.jpg', text: 'Caprichada', targetRotation: 0 },
-  { url: '/images/image5.jpg', text: 'Cheirosa', targetRotation: 0 },
-  { url: '/images/image6.jpg', text: 'Doidinha', targetRotation: 0 },
-  { url: '/images/image7.jpg', text: 'Inteligente', targetRotation: 0 },
+export const cards: Omit<CardProps, 'targetRotation'>[] = [
+  { url: '/images/image1.jpg', text: 'Estilosa' },
+  { url: '/images/image2.jpg', text: 'Formosa' },
+  { url: '/images/image3.jpg', text: 'Carinhosa' },
+  { url: '/images/image4.jpg', text: 'Caprichada' },
+  { url: '/images/image5.jpg', text: 'Cheirosa' },
+  { url: '/images/image6.jpg', text: 'Doidinha' },
+  { url: '/images/image7.jpg', text: 'Inteligente' },
 ]

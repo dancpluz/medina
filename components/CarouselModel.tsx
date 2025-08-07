@@ -7,9 +7,10 @@ import { CardProps, cards, deltaShortest } from '@/lib/utils'
 import useAnimationContext from '@/hooks/useAnimationContext'
 
 const count = cards.length
-cards.forEach((card, i) => {
-  card.targetRotation = (i * 2 * Math.PI) / count
-})
+const updatedCards: CardProps[] = cards.map((card, i) => ({
+  ...card,
+  targetRotation: (i * 2 * Math.PI) / count
+}))
 
 export default function Carousel({ radius = 0.7 }: { radius?: number }) {
   const group = useRef<THREE.Group>(null!)
@@ -59,7 +60,7 @@ export default function Carousel({ radius = 0.7 }: { radius?: number }) {
       </Plane>
 
       <group ref={group} scale={[0, 0, 0]}>
-        {cards.map((card, i) => {
+        {updatedCards.map((card, i) => {
           const angle = (i * 2 * Math.PI) / count
           return (
             <group
