@@ -47,9 +47,9 @@ export type CardProps = { url: string; text: string; targetRotation: number }
 
 export const cards: Omit<CardProps, 'targetRotation'>[] = [
   { url: '/images/image1.jpg', text: 'Estilosa' },
-  { url: '/images/image2.jpg', text: 'Formosa' },
+  { url: '/images/image2.jpg', text: 'Linda' },
   { url: '/images/image3.jpg', text: 'Carinhosa' },
-  { url: '/images/image4.jpg', text: 'Caprichada' },
+  { url: '/images/image4.jpg', text: 'Caprichosa' },
   { url: '/images/image5.jpg', text: 'Cheirosa' },
   { url: '/images/image6.jpg', text: 'Doidinha' },
   { url: '/images/image7.jpg', text: 'Inteligente' },

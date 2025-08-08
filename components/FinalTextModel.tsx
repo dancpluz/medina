@@ -22,7 +22,7 @@ export default function FinalTextModel() {
     if (stage.id === 'final') {
       introTimeout = setTimeout(() => setVisible(true), 2000)
       setShowFirst(true)
-      flipTimeout = setTimeout(() => setShowFirst(false), 6000)
+      flipTimeout = setTimeout(() => setShowFirst(false), 7000)
     } else {
       setVisible(false)
       setShowFirst(true)
