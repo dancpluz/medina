@@ -38,12 +38,6 @@ And the best part? It worked! She said yes, and the site was a success. If you w
 - **3D Modeling:** Blender
 - **Deploy:** Vercel
 
-### Change to "How to Run" Instructions
-
-I have updated the instructions for running the application to use `npm run start` instead of `start`. The revised section is below.
-
------
-
 ### 👨‍💻 How to Run
 
 The project has a modular code structure with well-defined components and hooks, making it easy to maintain and understand.
