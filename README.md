@@ -38,30 +38,43 @@ And the best part? It worked! She said yes, and the site was a success. If you w
 - **3D Modeling:** Blender
 - **Deploy:** Vercel
 
-## 👨‍💻 How to Run
+### Change to "How to Run" Instructions
+
+I have updated the instructions for running the application to use `npm run start` instead of `start`. The revised section is below.
+
+-----
+
+### 👨‍💻 How to Run
 
 The project has a modular code structure with well-defined components and hooks, making it easy to maintain and understand.
 
 1.  **Clone the repository:**
+
     ```bash
     git clone https://github.com/dancpluz/medina.git
     ```
+
 2.  **Navigate to the project directory:**
+
     ```bash
     cd medina
     ```
+
 3.  **Install dependencies:**
+
     ```bash
     npm install
     ```
-4.  **Start the development server:**
+
+4.  **Start the production server:**
+
     ```bash
-    npm run dev
+    npm run start
     ```
+
 5.  **Access the application in your browser:**
-    ```bash
-    start http://localhost:3000
-    ```
+
+    The application will be accessible at **http://localhost:3000** after the server starts.
 
 ### 🌍 Deployment
 
