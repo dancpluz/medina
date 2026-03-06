@@ -36,7 +36,7 @@ export const stageArray: Stage[] = [
   },
   {
     id: 'final',
-    buttonText: 'kkkkkkkkk',
+    buttonText: 'Reiniciar',
     fadeIn: 800,
     fadeOut: 600,
     delay: 4000
