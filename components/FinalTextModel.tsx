@@ -95,7 +95,7 @@ export default function FinalTextModel() {
           bevelSize={0.02}
           bevelThickness={0.01}
         >
-          E o cuzinho?
+          Eu te amo!
           <MeshTransmissionMaterial {...materialProps} />
         </Text3D>
       ) : (
@@ -108,7 +108,7 @@ export default function FinalTextModel() {
           bevelSize={0.02}
           bevelThickness={0.01}
         >
-          Eu te amo!
+          Eu te AMO!!
           <MeshTransmissionMaterial {...materialProps} />
         </Text3D>
       )}
